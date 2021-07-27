@@ -3,59 +3,30 @@ import './ToDoBox.scss'
 import EntryBox from '../entry-box/EntryBox';
 import ListItemBox from '../list-item-box/ListItemBox';
 import {ListItem} from '../models/ListItem';
+import {addItemToList, removeItemFromList, updateAllItemsStatusInList, updateItemValueInList, updateItemStatusInList} from '../ListService';
 
 const ToDoBox = () =>
 {
     const [listItems, setListItems] = useState<ListItem[]>([]);
-
-    const addToList = (newItem: string) =>
-    {
-        if (newItem && newItem !== '')
-        {
-            setListItems([...listItems, {value: newItem, completed: false}]);
-        }
-    }
-
-    const updateItem = (index: number, newVal: string) =>
-    {
-        let newList = [...listItems];
-        if(!newVal || newVal === '')
-        {
-            newList.splice(index, 1);
-            setListItems(newList);
-        }
-        else if (newList[index].value !== newVal)
-        {
-            newList[index].value = newVal;
-            setListItems(newList);
-        }
-    }
-
-    const updateItemStatus = (index: number, isComplete: boolean) =>
-    {
-        const newList = [...listItems];
-        newList[index].completed = isComplete;
-        setListItems(newList);
-    }
-
-    const updateAllItemsStatus = (isComplete: boolean) =>
-    {
-        const newList = [...listItems];
-        newList.forEach(item => item.completed = isComplete);
-        setListItems(newList);
-    }
-
+    const updateState = (listItems: ListItem[] | null) => (listItems && setListItems(listItems));
     useEffect(() => console.log('List Items are: ', listItems));
+
+    const addToList = (newItem: string) => updateState(addItemToList(listItems, newItem));
+    const updateItemValue = (index: number, newVal: string) => updateState(updateItemValueInList(listItems, index, newVal));
+    const updateItemStatus = (index: number, isComplete: boolean) => updateState(updateItemStatusInList(listItems, index, isComplete));
+    const updateAllItemsStatus = (isComplete: boolean) => updateState(updateAllItemsStatusInList(listItems, isComplete));
+    const removeItem = (index: number) => updateState(removeItemFromList(listItems, index));
 
     const createListItem = () =>
     {
         return listItems.map((item, index) =>
         {
-            const updateValueAtIndex = (newVal: string) => updateItem(index, newVal);
+            const updateValueAtIndex = (newVal: string) => updateItemValue(index, newVal);
             const updateStatusAtIndex = (newVal: boolean) => updateItemStatus(index, newVal);
+            const removeItemAtIndex = () => removeItem(index);
             return (
                 <ListItemBox key={index} listItem={item}
-                             updateItem={updateValueAtIndex} updateItemStatus={updateStatusAtIndex}/>
+                             updateItem={updateValueAtIndex} updateItemStatus={updateStatusAtIndex} removeItem={removeItemAtIndex}/>
             )
         });
     }
