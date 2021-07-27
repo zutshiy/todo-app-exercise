@@ -1,0 +1,36 @@
+* {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 20px;
+}
+
+body {
+  background-color: #f3f3f3;
+}
+
+.App {
+  text-align: center;
+  margin-top: 100px;
+  margin-left: 700px;
+  width: 600px;
+}
+
+.input-item {
+  width: 100%;
+  height: auto;
+  border: none;
+  font-size: 1.3rem;
+}
+
+.input-container {
+  color: #cbcbcb;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 5px 10px;
+  height: 60px;
+  border-bottom: 0.5px solid #cbcbcb;
+}
+
+.hidden {
+  visibility: hidden;
+}

@@ -1,0 +1,8 @@
+.list-item-input {
+  color: #484848;
+
+  &:focus-visible,
+  &:focus {
+    outline: none;
+  }
+}
