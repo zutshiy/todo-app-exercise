@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './ToDoBox.scss'
 import EntryBox from '../entry-box/EntryBox';
 import ListItemBox from '../list-item-box/ListItemBox';
@@ -17,7 +17,7 @@ const ToDoBox = () =>
 {
     const [listItems, setListItems] = useState<ListItem[]>([]);
     const updateState = (listItems: ListItem[] | null) => (listItems && setListItems(listItems));
-    useEffect(() => console.log('List Items are: ', listItems));
+    // useEffect(() => console.log('List Items are: ', listItems));
 
     const addToList = (newItem: string) => updateState(addItemToList(listItems, newItem));
     const updateItemValue = (index: number, newVal: string) => updateState(updateItemValueInList(listItems, index, newVal));
