@@ -26,11 +26,15 @@ body {
   display: flex;
   gap: 1rem;
   align-items: center;
-  padding: 5px 10px;
+  padding: 5px 15px;
   height: 60px;
   border-bottom: 0.5px solid #cbcbcb;
 }
 
 .hidden {
   visibility: hidden;
+}
+
+.hidden-remove {
+  display: none;
 }

@@ -3,7 +3,15 @@ import './ToDoBox.scss'
 import EntryBox from '../entry-box/EntryBox';
 import ListItemBox from '../list-item-box/ListItemBox';
 import {ListItem} from '../models/ListItem';
-import {addItemToList, removeItemFromList, updateAllItemsStatusInList, updateItemValueInList, updateItemStatusInList} from '../ListService';
+import {
+    addItemToList,
+    removeItemFromList,
+    updateAllItemsStatusInList,
+    updateItemValueInList,
+    updateItemStatusInList,
+    clearCompletedFromList, hideFilteredItemsFromList
+} from '../ListService';
+import MetaDataBox from '../meta-data-box/MetaDataBox';
 
 const ToDoBox = () =>
 {
@@ -16,6 +24,8 @@ const ToDoBox = () =>
     const updateItemStatus = (index: number, isComplete: boolean) => updateState(updateItemStatusInList(listItems, index, isComplete));
     const updateAllItemsStatus = (isComplete: boolean) => updateState(updateAllItemsStatusInList(listItems, isComplete));
     const removeItem = (index: number) => updateState(removeItemFromList(listItems, index));
+    const hideFilteredItems = (filter: string) => (updateState(hideFilteredItemsFromList(listItems, filter)));
+    const clearCompleted = () => updateState(clearCompletedFromList(listItems));
 
     const createListItem = () =>
     {
@@ -25,8 +35,10 @@ const ToDoBox = () =>
             const updateStatusAtIndex = (newVal: boolean) => updateItemStatus(index, newVal);
             const removeItemAtIndex = () => removeItem(index);
             return (
-                <ListItemBox key={index} listItem={item}
-                             updateItem={updateValueAtIndex} updateItemStatus={updateStatusAtIndex} removeItem={removeItemAtIndex}/>
+                <ul>
+                    <li><ListItemBox key={index} listItem={item}
+                                     updateItem={updateValueAtIndex} updateItemStatus={updateStatusAtIndex} removeItem={removeItemAtIndex}/></li>
+                </ul>
             )
         });
     }
@@ -37,6 +49,7 @@ const ToDoBox = () =>
             <div className='todo-box'>
                 <EntryBox isEmpty={listItems.length === 0} onItemEnter={addToList} onSelectAll={updateAllItemsStatus}/>
                 {createListItem()}
+                {listItems.length !== 0 && <MetaDataBox listItems={listItems} onBtnClick={hideFilteredItems} onClearClick={clearCompleted}/>}
             </div>
         </div>
     )

@@ -11,6 +11,7 @@ const ListItemBox = ({listItem, updateItem, updateItemStatus, removeItem}: {
 }) =>
 {
     const [editable, setEditable] = useState<boolean>(false);
+    const [hovered, setHovered] = useState<boolean>(false);
     const onEdit = (isStart: boolean, newVal?: string) =>
     {
         if (isStart)
@@ -28,14 +29,13 @@ const ListItemBox = ({listItem, updateItem, updateItemStatus, removeItem}: {
     };
 
     const updateItemVal = (newVal: string) => (updateItem(newVal));
-
     const onCheck = (e: ChangeEvent) => (updateItemStatus((e.target as HTMLInputElement).checked));
 
     return (
-        <div className='input-container'>
+        <div className={'input-container' + (listItem.hide ? ' hidden-remove' : '')} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <ItemCheckBox checked={listItem.completed} onCheck={onCheck}/>
             <ListItemInput itemValue={listItem.value} checked={listItem.completed} onChange={updateItemVal} editable={editable} onEdit={onEdit}/>
-            <RemoveButton onBtnClick={removeItem}/>
+            <RemoveButton hovered={hovered} onBtnClick={removeItem}/>
         </div>
     )
 }

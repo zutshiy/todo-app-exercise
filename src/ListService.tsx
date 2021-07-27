@@ -37,8 +37,29 @@ export const updateAllItemsStatusInList = (listItems: ListItem[], isComplete: bo
 
 export const removeItemFromList = (listItems: ListItem[], index: number): ListItem[] =>
 {
-    let newList = listItems.filter(item => listItems.indexOf(item) !== index);
-    console.log("RemovedList: ", newList);
-    // return [{value: 'newItem', completed: false}];
-    return newList;
+    return listItems.filter(item => listItems.indexOf(item) !== index);
+}
+
+export const hideFilteredItemsFromList = (listItems: ListItem[], filter: string): ListItem[] | null =>
+{
+    const newList = [...listItems];
+    newList.forEach(item => item.hide = false);
+    switch (filter)
+    {
+        case 'All':
+            return newList;
+        case 'Active':
+            newList.filter(item => item.completed).map(item => item.hide = true);
+            return newList;
+        case 'Completed':
+            newList.filter(item => !item.completed).map(item => item.hide = true);
+            return newList;
+        default:
+            return null;
+    }
+}
+
+export const clearCompletedFromList = (listItems: ListItem[]): ListItem[] =>
+{
+    return listItems.filter(item => !item.completed);
 }

@@ -1,10 +1,12 @@
 import React from 'react';
 import './RemoveButton.scss'
 
-const RemoveButton = ({onBtnClick}: { onBtnClick: () => void }) =>
+const RemoveButton = ({onBtnClick, hovered}: { onBtnClick: () => void, hovered: boolean }) =>
 {
+    let className = 'remove-button';
+    className += !hovered ? ' hidden' : '';
     return (
-        <button className='remove-button' onClick={onBtnClick}>
+        <button className={className} onClick={onBtnClick}>
             <i className='fa fa-times-circle'/>
         </button>
     )
