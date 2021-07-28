@@ -16,15 +16,21 @@ const MetaDataBox = ({listItems, onBtnClick, onClearClick}: { listItems: ListIte
 
     let isAnyCompleted = listItems.find(item => item.completed);
     return (
-        <div className='input-container meta-data-box'>
-            <span>{leftItems} items left</span>
-            <div className='meta-buttons'>
-                {
-                    filters.map((filter, index) => (
-                        <button key={index} className={selectedClassName(filter)} onClick={() => onButtonClick(filter)}>{filter}</button>))
-                }
+        <div>
+            <div className='meta-bg-container'>
+                <div className='meta-bg'/>
+                <div className='meta-bg'/>
             </div>
-            <button className={'clear-button' + (!isAnyCompleted ? ' hidden' : '')} onClick={onClearClick}>Clear Completed</button>
+            <div className='input-container meta-data-box'>
+                <span>{leftItems} items left</span>
+                <div className='meta-buttons'>
+                    {
+                        filters.map((filter, index) => (
+                            <button key={index} className={selectedClassName(filter)} onClick={() => onButtonClick(filter)}>{filter}</button>))
+                    }
+                </div>
+                <button className={'clear-button' + (!isAnyCompleted ? ' hidden' : '')} onClick={onClearClick}>Clear Completed</button>
+            </div>
         </div>
     );
 };
