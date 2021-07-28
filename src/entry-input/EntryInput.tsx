@@ -4,7 +4,7 @@ import './EntryInput.scss';
 const EntryInput = ({userInput, onAction, onEnter}: { userInput: string, onAction: (val: string) => void, onEnter: () => void }) =>
 {
     return (
-        <input className='input-item list-item-input' type='text' value={userInput} onChange={e => onAction(e.target.value)}
+        <input placeholder="What needs to be done?" className='input-item entry-input' type='text' value={userInput} onChange={e => onAction(e.target.value)}
                onKeyPress={e => handleKeyPress(e, onEnter)}/>
     )
 }
