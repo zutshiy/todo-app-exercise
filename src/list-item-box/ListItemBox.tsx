@@ -1,8 +1,10 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import ItemCheckBox from '../item-check-box/ItemCheckBox';
 import ListItemInput from '../list-item-input/ListItemInput';
 import {ListItem} from '../models/ListItem';
 import RemoveButton from '../remove-button/RemoveButton';
+
+let _isMounted = true;
 
 const ListItemBox = ({listItem, updateItem, updateItemStatus, removeItem}: {
     listItem: ListItem, updateItem: (newVal: string) => void,
@@ -13,8 +15,20 @@ const ListItemBox = ({listItem, updateItem, updateItemStatus, removeItem}: {
     const [editable, setEditable] = useState<boolean>(false);
     const [hovered, setHovered] = useState<boolean>(false);
 
+    useEffect(() => {
+        _isMounted = true;
+        return () => {
+            _isMounted = false;
+        }
+    });
+
     const onEdit = (isStart: boolean, newVal?: string) =>
     {
+        if(!_isMounted)
+        {
+            return;
+        }
+
         if (isStart)
         {
             setEditable(true);
