@@ -24,7 +24,7 @@ const MetaDataBox = ({listItems, onBtnClick, onClearClick}: { listItems: ListIte
                         <button key={index} className={selectedClassName(filter)} onClick={() => onButtonClick(filter)}>{filter}</button>))
                 }
             </div>
-            <a className={!isAnyCompleted ? 'hidden' : ''} href='#' onClick={onClearClick}>Clear Completed</a>
+            <button className={'clear-button' + (!isAnyCompleted ? ' hidden' : '')} onClick={onClearClick}>Clear Completed</button>
         </div>
     );
 };

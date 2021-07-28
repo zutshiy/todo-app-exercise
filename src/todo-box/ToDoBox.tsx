@@ -29,18 +29,22 @@ const ToDoBox = () =>
 
     const createListItem = () =>
     {
-        return listItems.map((item, index) =>
-        {
-            const updateValueAtIndex = (newVal: string) => updateItemValue(index, newVal);
-            const updateStatusAtIndex = (newVal: boolean) => updateItemStatus(index, newVal);
-            const removeItemAtIndex = () => removeItem(index);
-            return (
-                <ul>
-                    <li><ListItemBox key={index} listItem={item}
-                                     updateItem={updateValueAtIndex} updateItemStatus={updateStatusAtIndex} removeItem={removeItemAtIndex}/></li>
-                </ul>
-            )
-        });
+        return <ul>
+            {
+                listItems.map((item, index) =>
+                {
+                    const updateValueAtIndex = (newVal: string) => updateItemValue(index, newVal);
+                    const updateStatusAtIndex = (newVal: boolean) => updateItemStatus(index, newVal);
+                    const removeItemAtIndex = () => removeItem(index);
+                    return (
+                        <li key={index}><ListItemBox listItem={item}
+                                                     updateItem={updateValueAtIndex} updateItemStatus={updateStatusAtIndex} removeItem={removeItemAtIndex}/>
+                        </li>
+                    )
+                })
+            }
+        </ul>
+
     }
 
     return (

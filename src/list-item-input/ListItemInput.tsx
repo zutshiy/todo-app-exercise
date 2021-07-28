@@ -1,4 +1,4 @@
-import React, {LegacyRef} from 'react';
+import React from 'react';
 import OnOutsiceClick from 'react-outclick';
 import './ListItemInput.scss';
 
@@ -13,10 +13,8 @@ const ListItemInput = ({itemValue, checked, editable, onChange, onEdit}: {
     className += checked ? ' checked' : '';
     className += editable ? ' editable' : '';
 
-    const input: LegacyRef<HTMLDivElement> | undefined = React.createRef();
-
     return (
-        <div ref={input} className='list-item-input-container'>
+        <div className='list-item-input-container'>
             <OnOutsiceClick onOutsideClick={() => onEdit(false)} display={'contents'}>
                 <input value={itemValue} readOnly={!editable} className={className} type='text'
                        onChange={(e) => onChange(e.currentTarget.value)}

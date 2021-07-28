@@ -12,6 +12,7 @@ const ListItemBox = ({listItem, updateItem, updateItemStatus, removeItem}: {
 {
     const [editable, setEditable] = useState<boolean>(false);
     const [hovered, setHovered] = useState<boolean>(false);
+
     const onEdit = (isStart: boolean, newVal?: string) =>
     {
         if (isStart)
