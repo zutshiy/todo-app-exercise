@@ -1,12 +1,12 @@
 .remove-button {
-    background: none;
-    border: none;
-    font-size: 1.3rem;
-    opacity: 0.5;
-    color: #db3f3f;
-    user-select: text;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  color: #db3f3f;
+  user-select: text;
 
-    &:hover {
-        opacity: 1;
-    }
+  &:hover {
+    opacity: 1;
+  }
 }

@@ -22,11 +22,19 @@ const EntryBox = ({isEmpty, onItemEnter, onSelectAll}: { isEmpty: boolean, onIte
     }
 
     return (
-        <div className='input-container'>
-            <SelectAllButton isToShow={!isEmpty} isAllComplete={isAllComplete} onBtnClick={updateIsAllComplete}/>
-            <EntryInput userInput={userInput} onAction={updateUserInput} onEnter={addUserInput}/>
-        </div>
-    )
+      <div className="input-container">
+        <SelectAllButton
+          isToShow={!isEmpty}
+          isAllComplete={isAllComplete}
+          onBtnClick={updateIsAllComplete}
+        />
+        <EntryInput
+          userInput={userInput}
+          onAction={updateUserInput}
+          onEnter={addUserInput}
+        />
+      </div>
+    );
 }
 
 export default EntryBox;
